@@ -126,9 +126,43 @@ app.put('/api/v1/clients/:id', (req, res) => {
   const client = clients.find(client => client.id === id);
 
   /* ---------- Update code below ----------*/
+  if (status && client.status !== status){
+    clients.filter((cl)=>cl.status === client.status)
+    .forEach((cl)=> {
+      if (cl.priority >= client.priority ){
+        cl.priority -= 1
+        console.log(cl.priority);
+      }
+    })
+    client.status = status
+    client.priority = clients.filter((cl)=>cl.status === status).length
+  }
+  if (priority){
+    clients.filter((cl)=> cl.status === client.status)
+    .forEach((cl)=> {
+      if (cl.priority >= client.priority ){
+        cl.priority -= 1
+      }
+      if (cl.priority >= priority ){
+        cl.priority += 1
+      }
+    })
+    client.priority = priority
+    // console.log(priority);
+  }
 
-
-
+  console.log("backlog")
+  clients.filter((cl)=> cl.status === "backlog").forEach((cl) => {
+    console.log(`id:${cl.id}   status:${cl.status}   priority:${cl.priority}  name:${cl.name}` );
+  })
+  console.log("in-progress")
+  clients.filter((cl)=> cl.status === "in-progress").forEach((cl) => {
+    console.log(`id:${cl.id}   status:${cl.status}   priority:${cl.priority}  name:${cl.name}`);
+  })
+  console.log("complete")
+  clients.filter((cl)=> cl.status === "complete").forEach((cl) => {
+    console.log(`id:${cl.id}   status:${cl.status}   priority:${cl.priority}  name:${cl.name}`);
+  })
   return res.status(200).send(clients);
 });
 
