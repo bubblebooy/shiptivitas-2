@@ -151,18 +151,18 @@ app.put('/api/v1/clients/:id', (req, res) => {
     // console.log(priority);
   }
 
-  console.log("backlog")
-  clients.filter((cl)=> cl.status === "backlog").forEach((cl) => {
-    console.log(`id:${cl.id}   status:${cl.status}   priority:${cl.priority}  name:${cl.name}` );
-  })
-  console.log("in-progress")
-  clients.filter((cl)=> cl.status === "in-progress").forEach((cl) => {
-    console.log(`id:${cl.id}   status:${cl.status}   priority:${cl.priority}  name:${cl.name}`);
-  })
-  console.log("complete")
-  clients.filter((cl)=> cl.status === "complete").forEach((cl) => {
-    console.log(`id:${cl.id}   status:${cl.status}   priority:${cl.priority}  name:${cl.name}`);
-  })
+  // console.log("backlog")
+  // clients.filter((cl)=> cl.status === "backlog").forEach((cl) => {
+  //   console.log(`id:${cl.id}   status:${cl.status}   priority:${cl.priority}  name:${cl.name}` );
+  // })
+  // console.log("in-progress")
+  // clients.filter((cl)=> cl.status === "in-progress").forEach((cl) => {
+  //   console.log(`id:${cl.id}   status:${cl.status}   priority:${cl.priority}  name:${cl.name}`);
+  // })
+  // console.log("complete")
+  // clients.filter((cl)=> cl.status === "complete").forEach((cl) => {
+  //   console.log(`id:${cl.id}   status:${cl.status}   priority:${cl.priority}  name:${cl.name}`);
+  // })
   return res.status(200).send(clients);
 });
 
