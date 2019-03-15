@@ -131,7 +131,6 @@ app.put('/api/v1/clients/:id', (req, res) => {
     .forEach((cl)=> {
       if (cl.priority >= client.priority ){
         cl.priority -= 1
-        console.log(cl.priority);
       }
     })
     client.status = status
@@ -148,7 +147,6 @@ app.put('/api/v1/clients/:id', (req, res) => {
       }
     })
     client.priority = priority
-    // console.log(priority);
   }
 
   // console.log("backlog")
@@ -163,6 +161,13 @@ app.put('/api/v1/clients/:id', (req, res) => {
   // clients.filter((cl)=> cl.status === "complete").forEach((cl) => {
   //   console.log(`id:${cl.id}   status:${cl.status}   priority:${cl.priority}  name:${cl.name}`);
   // })
+
+  const updateStatment = db.prepare('UPDATE clients SET status = ?, priority = ? WHERE id = ?')
+  clients.forEach((cl) => {
+    updateStatment.run(cl.status, cl.priority, cl.id)
+  })
+
+
   return res.status(200).send(clients);
 });
 
